@@ -13,8 +13,9 @@ public class Curso {
 	private int id;
 	
 	private String descripcion;
+	public Curso() {}
 
-	public Curso(String descripcion) {
+	public Curso( String descripcion) {
 		super();
 		this.descripcion = descripcion;
 	}
