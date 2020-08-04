@@ -38,18 +38,39 @@ public class Main {
 		ingresarCurso(cur2);
 		ingresarCurso(cur3);
 		
+		//ingresar curso
+		
+				Estudiantes est1 = new Estudiantes ("Angelo", "silva");
+				Estudiantes est2 = new Estudiantes ("carlos","andrade");
+				Estudiantes est3 = new Estudiantes ("jose","jimenez");
+				
+				
+				ingresarEstudiante(est1);
+				ingresarEstudiante(est2);
+				ingresarEstudiante(est3);
+				
 		
 		//modificar curso
          
 		
 		modificaCurso(3,"finanza");
-		
 		//eliminar curso
-              Curso curs4 = new Curso();
-              curs4.setId(2);
+        
 		
 		
-		eliminarCurso(curs4);
+				eliminarCurso(2);
+		
+		//modificar estudiantes
+        
+		
+				modificaEstudiante(5,"juan","paredes");
+		
+		
+		//eliminar estudiantes
+        
+		
+		
+				eliminarEstudiante(4);
 		
 		
 		
@@ -62,9 +83,12 @@ public class Main {
        
 	}
 	
-	static void eliminarCurso(Curso curso) {
+	static void eliminarCurso(int id) {
 		Session session = sessionFactory.openSession();
+		
 		session.beginTransaction();
+		Curso curso = 
+                (Curso)session.get(Curso.class,id);
 		session.delete(curso);
 		
 		session.getTransaction().commit();
@@ -89,18 +113,27 @@ public class Main {
 	
 	
 	
-	static void modificaEstudiante (Estudiantes estudiante) {
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			session.update(estudiante);
-			
-			session.getTransaction().commit();
-			session.close();
-	}
+	static void modificaEstudiante (int id, String nombre, String apellido) {
+		Session session = sessionFactory.openSession();
+		
+		   
+  	  session.beginTransaction();
+       Estudiantes estudiantes = 
+                  (Estudiantes)session.get(Estudiantes.class,id); 
+       estudiantes.setNombre(nombre);
+       estudiantes.setApellido(apellido);
+       session.update(estudiantes); 
+   	session.getTransaction().commit();
+   
+       session.close(); 
+    
+ }
 	static void eliminarEstudiante (int id ) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.delete(id);
+		 Estudiantes estudiantes = 
+                 (Estudiantes)session.get(Estudiantes.class,id); 
+		session.delete(estudiantes);
 		
 		session.getTransaction().commit();
 		session.close();
